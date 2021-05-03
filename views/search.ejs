@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <style>
+      .my-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .my-box {
+        border: 2px solid black;
+        width: 25%;
+      }
+    </style>
+    <title>Cookmaster - Buscar Receitas</title>
+  </head>
+  <body>
+    <div class="text-light navbar navbar-dark bg-dark">
+      <h5 class="col">Cookmaster</h5>
+      <% if (user == null) { %>
+      <a data-testid="login" class="nav-link col text-light text-right" href="/login">Login</a>
+      <%} else {%>
+      <p class="col text-center"><%= `${user.name} ${user.lastName}` %></p>
+      <a data-testid="logout" class="text-light nav-link col text-right" href="/logout"> Logout</a>
+      <%}%>
+    </div>
+    <div class="container">
+      <h2>Buscar Receitas</h2>
+      <div>
+        <form class="mb-3 d-flex" action="" method="GET">
+          <label class="sr-only" for="searchInput">Search </label>
+          <input
+            class="mr-2 form-control"
+            data-testid="receita"
+            type="text"
+            name="q"
+            id="searchInput"
+          />
+          <button class="btn btn-primary align-self-center" data-testid="buscar">Buscar</button>
+        </form>
+      </div>
+      <div class="my-container">
+        <% if (!recipes) { %> <%} else {%>
+        <div class="mb-5 mr-5 my-box">
+          <div class="p-3 bg-info text-white">
+            <div class="row">
+              <div class="col">
+                <p class="d-flex justify-content-center"><%= recipes.name %></p>
+                <p class="d-flex justify-content-center"><%= recipes.user %></p>
+              </div>
+              <div class="col align-self-end">
+                <a
+                  class="text-light d-flex justify-content-center"
+                  href="/recipes/<%= recipes.id %>"
+                  >Ver mais</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <%}%>
+      </div>
+    </div>
+  </body>
+</html>
